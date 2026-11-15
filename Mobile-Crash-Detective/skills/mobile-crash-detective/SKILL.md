@@ -1,7 +1,7 @@
 ---
 name: mobile-crash-detective
 description: Analyzes mobile application crashes and runtime failures across Android, iOS, and .NET MAUI. Interprets Sentry events, stack traces, Android Logcat output, Apple crash reports, and exception details; separates evidence from hypotheses; ranks likely causes; and recommends investigation steps, fixes, reproduction ideas, and regression tests. Use when a mobile developer needs help diagnosing a crash, freeze, startup failure, unhandled exception, or suspected platform-specific runtime issue.
-version: 0.1.0
+version: 0.1.1
 summary: Evidence-based crash and runtime failure analysis for Android, iOS, and .NET MAUI.
 tags:
   - mobile-development
@@ -102,6 +102,7 @@ For stack traces:
 For Android:
 - Distinguish Java/Kotlin exceptions from native signal crashes.
 - Inspect `FATAL EXCEPTION`, process/thread name, exception chain, and application frames.
+- When a `NullPointerException` names a method or field — `Attempt to invoke virtual method '…Type.member()' on a null object reference`, or the equivalent read/write-field message — that message identifies only the null receiver or owner of the named member. It does not show that every other object in the source expression is null. Earlier calls on that line completed far enough to produce this receiver; later uses of the result are outside what the message shows. Read the expression at the application frame before naming which variable, field, or return value was null. For example, if the message names `Order.getCustomerName()`, the `Order` receiver is null. A view, binding, view model, or other call on the same line is not null unless the message or the source expression shows that.
 - For ANRs, inspect the main thread and relevant blocked/waiting threads; do not assume a blocked main thread's current frame is the original cause.
 - For native crashes, note signal, fault address, ABI, tombstone/backtrace, and symbolication status.
 - Consider Android version behavior, permissions, background execution limits, lifecycle, and vendor/device variation only when relevant to the evidence.
@@ -244,6 +245,7 @@ Before finalizing a diagnosis, verify:
 - [ ] The exact failure signal is preserved.
 - [ ] Facts are separated from hypotheses.
 - [ ] The most relevant application frame is identified where possible.
+- [ ] A null-dereference finding names only the receiver or field owner identified by the message, not every object in the expression.
 - [ ] At least one alternative explanation is considered when uncertainty exists.
 - [ ] The next diagnostic action is specific and minimal.
 - [ ] Any proposed fix includes assumptions and caveats.

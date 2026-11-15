@@ -27,8 +27,8 @@ Frequency: 3 reports from 2 devices
 
 - Classify this as an unhandled Java/Kotlin null dereference on the main thread.
 - Identify `bindHeader` line 84 as the first relevant application frame.
-- Explain that the `Order` reference is null at the point where `getCustomerName()` is invoked.
-- Avoid assuming why it is null. Possible causes include missing navigation data, a failed lookup, asynchronous loading order, or unexpected saved state.
+- Explain that the exception identifies the null receiver of `Order.getCustomerName()`. That receiver is an `Order`. Do not treat every other object in the expression at line 84 as null. A view, binding, view model, or other call on that line is not implicated unless the message or the source shows it.
+- Avoid assuming why that `Order` is null. Possible causes include missing navigation data, a failed lookup, asynchronous loading order, or unexpected saved state.
 - Ask for the code around line 84 and the code that supplies/loads the `Order`.
 - Recommend tests for missing order data, delayed loading, and process recreation if relevant.
 - Do not claim that adding a null check alone fixes the underlying data-flow problem.

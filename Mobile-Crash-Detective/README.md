@@ -1,6 +1,6 @@
 # Mobile Crash Detective
 
-**Version:** 0.1.0  
+**Version:** 0.1.1  
 **Purpose:** Evidence-based crash and runtime failure analysis for Android, iOS, and .NET MAUI developers.
 
 Mobile Crash Detective helps developers interpret Sentry events, stack traces, Android Logcat output, Apple crash reports, and managed runtime exceptions. It separates facts from hypotheses, ranks plausible causes, and recommends targeted investigation steps, potential fixes, and regression tests.
@@ -49,7 +49,7 @@ The `examples/` directory contains synthetic diagnostic scenarios. They are illu
 
 ## Limitations
 
-Version 0.1.0 analyzes information supplied by the user. It does not automatically connect to Sentry, inspect a repository, run an app, symbolicate a crash report, or execute tests. Those capabilities require appropriate integrations and tools. Suggested fixes must be validated in the affected app and environment.
+Version 0.1.1 analyzes information supplied by the user. It does not automatically connect to Sentry, inspect a repository, run an app, symbolicate a crash report, or execute tests. Those capabilities require appropriate integrations and tools. Suggested fixes must be validated in the affected app and environment.
 
 ## Privacy
 
@@ -57,4 +57,5 @@ Remove access tokens, credentials, personal information, customer identifiers, a
 
 ## Version history
 
+- **0.1.1** — An Android null-dereference message identifies the named method or field receiver, not every object in the source expression.
 - **0.1.0** — Initial cross-platform diagnostic workflow for Android, iOS, and .NET MAUI.
